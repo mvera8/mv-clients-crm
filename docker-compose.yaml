@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  wordpress:
+    image: wordpress:6.8.2-php8.2-apache
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wp
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WPLANG', 'en_US');
+        define('WP_ENV', 'development');
+    volumes:
+      # Core persistido en volumen (¡no lo pises con un bind local!)
+      - wp_core:/var/www/html
+      # Montá solo tu theme
+      - ./:/var/www/html/wp-content/themes/mv-clients-crm:cached
+      # y plugins
+      - ./wp-content/plugins:/var/www/html/wp-content/plugins:cached 
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.5
+    environment:
+      MYSQL_DATABASE: wp
+      MYSQL_USER: wp
+      MYSQL_PASSWORD: wp
+      MYSQL_ROOT_PASSWORD: wp
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wpcli:
+    image: wordpress:cli-php8.2
+    user: "33:33"          # www-data:www-data
+    working_dir: /var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wp
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+    volumes:
+      - wp_core:/var/www/html
+      - ./:/var/www/html/wp-content/themes/mv-clients-crm:cached
+    depends_on:
+      - db
+      - wordpress
+
+volumes:
+  db_data:
+  wp_core:

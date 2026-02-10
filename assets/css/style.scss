@@ -1,0 +1,55 @@
+// @import "bootstrap/scss/bootstrap";
+
+// 0) SIEMPRE primero functions
+@import "bootstrap/scss/functions";
+
+// 1) Tus overrides PRIMITIVOS (sin !default)
+@import "./custom-variables";
+
+// 2) Ahora sí, Bootstrap variables y compañía
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+// 2. Layout / básicos (agregá más si querés)
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+
+// 3. Componentes (agregá los que vayas a usar)
+@import "bootstrap/scss/accordion";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/button-group";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/carousel";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/offcanvas";
+@import "bootstrap/scss/pagination";
+@import "bootstrap/scss/placeholders";
+@import "bootstrap/scss/popover";
+@import "bootstrap/scss/progress";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/toasts";
+@import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/spinners";
+
+// 4. Utilidades
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities/api";
+
+// body {
