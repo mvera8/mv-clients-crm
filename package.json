@@ -1,0 +1,18 @@
+{
+  "name": "mv-clients-crm",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^5.4.3",
+    "sass": "^1.91.0",
+    "vite": "^5.4.0"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8"
+  }
+}
