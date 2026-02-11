@@ -18,42 +18,23 @@ $data = $args['data'];
                 <thead>
                     <tr>
                         <th>Titulo</th>
+                        <th>Projecto</th>
                         <th>Estado</th>
                         <th>Prioridad</th>
                     </tr>
-                </thea>
+                </thead>
                 <tbody>
                     <?php 
-                    while ( $data->have_posts() ) : $data->the_post(); 
-                    ?>
-                        <tr>
-                            <td>
-                                <?php
-                                printf(
-                                    '<a href="%s">%s</a>',
-                                    get_permalink(),
-                                    get_the_title()
-                                );
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                $status = get_field( 'status' );
-                                if ($status) {
-                                    echo mv_status_tag($status);
-                                }
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                $priority = get_field( 'priority' );
-                                if ($priority) {
-                                    echo mv_priority_tag($priority);
-                                }
-                                ?>
-                            </td>
-                        </tr>
-                    <?php 
+                    while ( $data->have_posts() ) : $data->the_post();
+                         get_template_part(
+                            'template-parts/row',
+                            'tasks',
+                            array(
+                                'id'    => get_the_ID(),
+                                'title' => get_the_title(),
+                                'link'  => get_the_permalink(),
+                            ),
+                        );
                     endwhile; 
                     ?>
                 </tbody>

@@ -77,10 +77,11 @@ get_header();
                     );
 
                     get_template_part(
-                        'template-parts/title',
-                        'section',
+                        'template-parts/dashboard',
+                        'title',
                         array(
                             'title' => get_the_title(),
+                            'breadcrumb' => false
                         )
                     );
                     ?>
@@ -101,26 +102,24 @@ get_header();
                             </div>
                         <?php endforeach; ?>
                     
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <?php
                             get_template_part(
                                 'template-parts/table',
                                 'clients',
                                 array(
-                                    'title' => 'Clientes',
                                     'data' => $clients_query,
                                 )
                             );
                             ?>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <?php   
                             get_template_part(
                                 'template-parts/table',
                                 'tasks',
                                 array(
-                                    'title' => 'Clientes',
                                     'data' => $tasks_query,
                                 )
                             );
