@@ -2,7 +2,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $queried_object = get_queried_object();
-//echo $queried_object->name;
+$queried_object_type = $queried_object->name;
 
 get_header();
 ?>
@@ -16,43 +16,71 @@ get_header();
                 <div class="container">
                     <?php
                     get_template_part(
-                        'template-parts/breadcrumbs',
-                        null,
-                        array(
-                            'links' => 'lala',
-                            'active_text' => get_the_archive_title(),                        )
-                    );
-
-                    get_template_part(
-                        'template-parts/title',
-                        'section',
+                        'template-parts/dashboard',
+                        'title',
                         array(
                             'title' => get_the_archive_title(),
                         )
                     );
                     ?>
-                    
-                    <?php if ( have_posts() ) : ?>
-                        <ul class="list-unstyled">
-                            <?php while ( have_posts() ) : the_post(); ?>
-                                <li class="mb-3">
-                                    <a href="<?php the_permalink(); ?>" class="text-decoration-none">
-                                        <?php the_title(); ?>
-                                    </a>
-                                </li>
-                            <?php endwhile; ?>
-                        </ul>
 
-                        <div class="mt-4">
-                            <?php the_posts_pagination(); ?>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <?php if ( have_posts() ) : ?>
+                               <table class="table">  
+                                    <thead>
+                                        <tr>
+                                            <th>Titulo</th>
+                                            <th>Projecto</th>
+                                            <th>Horas</th>
+                                            <th>Estado</th>
+                                            <th>Prioridad</th>
+                                        </tr>
+                                    </thead>        
+                                    <tbody>
+                                        <?php
+                                        while ( have_posts() ) : the_post();
+                                            switch ($queried_object_type) {
+                                                case 'clients':
+                                                    get_template_part(
+                                                        'template-parts/row',
+                                                        'tasks',
+                                                        array(
+                                                            'id'    => get_the_ID(),
+                                                            'title' => get_the_title(),
+                                                            'link'  => get_the_permalink(),
+                                                        ),
+                                                    );
+                                                    break;
+
+                                                case 'tasks':
+                                                    get_template_part(
+                                                        'template-parts/row',
+                                                        'tasks',
+                                                        array(
+                                                            'id'    => get_the_ID(),
+                                                            'title' => get_the_title(),
+                                                            'link'  => get_the_permalink(),
+                                                        ),
+                                                    );
+                                                    break;
+
+                                                default:
+                                                    echo 'bbbb';
+                                            }
+                                        endwhile; ?>
+                                    </tbody>
+                                </table>
+
+                                <div class="mt-4">
+                                    <?php the_posts_pagination(); ?>
+                                </div>
+
+                            <?php else : ?>
+                                <p>No hay contenido para mostrar.</p>
+                            <?php endif; ?>
                         </div>
-
-                    <?php else : ?>
-                        <p>No hay contenido para mostrar.</p>
-                    <?php endif; ?>
-
-
-
+                    </div>
                 </div>
             </section>
         </div>
