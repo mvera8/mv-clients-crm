@@ -9,6 +9,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $title = $args['title'] ?? '';
+$prelink = $args['prelink'] ?? '';
 $breadcrumb = $args['breadcrumb'] ?? true;
 
 if ($breadcrumb ) {
@@ -17,6 +18,7 @@ if ($breadcrumb ) {
         null,
         array(
             'active_text' => $title,
+            'active_link' => $prelink,
         )
     );
 }

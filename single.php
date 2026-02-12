@@ -1,6 +1,9 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
+$queried_object = get_queried_object();
+$queried_object_type = $queried_object->post_type ?? '';
+
 get_header();
 ?>
 
@@ -14,10 +17,11 @@ get_header();
 
                     <?php
                     get_template_part(
-                        'template-parts/title',
-                        'section',
+                        'template-parts/dashboard',
+                        'title',
                         array(
                             'title' => get_the_title(),
+                            'prelink' => $post_type,
                         )
                     );
                     
