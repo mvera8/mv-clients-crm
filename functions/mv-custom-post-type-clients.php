@@ -45,7 +45,6 @@ function clients_custom_columns($columns) {
         'cb' => $columns['cb'],
         'title' => 'Cliente',
         'email' => 'Email',
-        'contacto' => 'Contacto',
         'empresa' => 'Empresa',
         'date' => 'Fecha'
     );
@@ -57,9 +56,6 @@ function clients_custom_column_content($column, $post_id) {
     switch ($column) {
         case 'email':
             echo get_post_meta($post_id, 'client_email', true);
-            break;
-        case 'contacto':
-            echo get_post_meta($post_id, 'client_contact_type', true);
             break;
         case 'empresa':
             echo get_post_meta($post_id, 'client_company', true);

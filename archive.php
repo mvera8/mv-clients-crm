@@ -6,10 +6,10 @@ $queried_object_type = $queried_object->name ?? '';
 
 $tableHead = array(
     'tasks' => array(
-        'title' => 'Titulo',
-        'project' => 'Projecto',
-        'hours' => 'Horas',
-        'status' => 'Estado',
+        'title'    => 'Titulo',
+        'project'  => 'Projecto',
+        'hours'    => 'Horas',
+        'status'   => 'Estado',
         'priority' => 'Prioridad',
     ),
     'clients' => array(
@@ -17,6 +17,11 @@ $tableHead = array(
         'email'   => 'Email',
         'company' => 'Empresa',
         'contact' => 'Contacto',
+    ),
+     'projects' => array(
+        'title'   => 'Nombre',
+        'website' => 'Sitio Web',
+        'client'  => 'Cliente',
     ),
 );
 
@@ -41,78 +46,51 @@ get_header();
                     ?>
 
                     <div class="btn-group mb-2" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-outline-primary active">Left</button>
+                        <button type="button" class="btn btn-outline-primary active">Todos</button>
                         <button type="button" class="btn btn-outline-primary">Middle</button>
                         <button type="button" class="btn btn-outline-primary">Right</button>
                     </div>
 
-                    <?php
-                    if ( have_posts() ) :
-                    
-                        if (array_key_exists($queried_object_type, $tableHead)) {
-                            echo '<div class="card mb-3"><div class="card-body"><table class="table"><thead>';
-                            foreach ($tableHead[$queried_object_type] as $key => $value) {
-                                echo '<th>' . esc_html($value) . '</th>';
-                            }
-                            echo '</thead><tbody>'; 
-                        } else {
-                            echo '<div class="row row-cols-1 row-cols-md-4">';
-                        }
-
-                            while ( have_posts() ) : the_post();
-                                switch ($queried_object_type) {
-                                    case 'clients':
-                                        get_template_part(
-                                            'template-parts/row',
-                                            'clients',
-                                            array(
-                                                'id'    => get_the_ID(),
-                                                'title' => get_the_title(),
-                                                'link'  => get_the_permalink(),
-                                            ),
-                                        );
-                                        break;
-
-                                    case 'tasks':
-                                        get_template_part(
-                                            'template-parts/row',
-                                            'tasks',
-                                            array(
-                                                'id'    => get_the_ID(),
-                                                'title' => get_the_title(),
-                                                'link'  => get_the_permalink(),
-                                            ),
-                                        );
-                                        break;
-
-                                    case 'projects':
-                                        get_template_part(
-                                            'template-parts/card',
-                                            'company',
-                                            array(
-                                                'title' => get_the_title(),
-                                                'link'  => get_the_permalink(),
-                                            ),
-                                        );
-                                        break;
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <table class="table">
+                                <?php
+                                if (array_key_exists($queried_object_type, $tableHead)) {
+                                    echo '<thead>';
+                                    foreach ($tableHead[$queried_object_type] as $key => $value) {
+                                        echo '<th>' . esc_html($value) . '</th>';
+                                    }
+                                    echo '</thead>';
                                 }
-                            endwhile;
-                            
-                        if (array_key_exists($queried_object_type, $tableHead)) {
-                            echo '</tbody></table></div></div>'; 
-                        } else {
-                            echo '</div>';
-                        }
-                        ?>
-
-                    <div class="mt-4">
-                        <?php the_posts_pagination(); ?>
+                                ?>
+                                
+                                <tbody>
+                                    <?php
+                                    if ( have_posts() ) :										
+                                        while ( have_posts() ) : the_post();
+                                            get_template_part(
+                                                'template-parts/row',
+                                                $queried_object_type,
+                                                array(
+                                                    'id'    => get_the_ID(),
+                                                    'title' => get_the_title(),
+                                                    'link'  => get_the_permalink(),
+                                                ),
+                                            );
+                                        endwhile;
+                                        ?>
+										<div class="mt-4">
+											<?php the_posts_pagination(); ?>
+										</div>
+                                    <?php else : ?>
+                                        <p>No hay contenido para mostrar.</p>
+                                    <?php endif; ?>
+                                </tbody>
+							</table>
+                        </div>
                     </div>
+                    
                 </div>
-
-                <?php else : ?>
-                    <p>No hay contenido para mostrar.</p>
-                <?php endif; ?>
             </section>
         </div>
     </div>

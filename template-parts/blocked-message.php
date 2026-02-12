@@ -8,9 +8,5 @@ defined( 'ABSPATH' ) || exit;
         <p class="mb-4 text-muted">
             Este sitio es solo para usuarios registrados.
         </p>
-
-        <a href="<?php echo wp_login_url(); ?>" class="btn btn-primary">
-            Iniciar sesión
-        </a>
     </div>
 </section>

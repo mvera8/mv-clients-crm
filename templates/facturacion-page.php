@@ -32,20 +32,59 @@ get_header();
                     the_content();
                     ?>
 
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <?php
+                            get_template_part(
+                                'template-parts/card',
+                                'number',
+                                array(
+                                    'title' => 'Total cobrado',
+                                    'total' => 'USD ' . number_format($payments_total),
+                                )
+                            );
+                            ?>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <?php
+                            get_template_part(
+                                'template-parts/card',
+                                'number',
+                                array(
+                                    'title' => 'Pendiente',
+                                    'total' => 'USD ' . number_format($payments_pending_total),
+                                )
+                            );
+                            ?>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-end mb-2">
+                                        <h3 class="mb-0">USD <?php echo number_format($payments_current_month); ?> <span class="text-body-secondary fs-6">Este mes</small></h3>
+                                        <p class="mb-0">Meta: USD <?php echo number_format($payments_current_month_goal); ?></p>
+                                    </div>
+                                    
 
+                                    <div class="progress">
+                                        <div 
+                                            class="progress-bar bg-success"
+                                            role="progressbar"
+                                            style="width: <?php echo esc_attr($progress_percentage); ?>%"
+                                            aria-valuenow="<?php echo esc_attr($progress_percentage); ?>"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100">
+                                        </div>
+                                    </div>
 
-                    <div class="progress mb-5">
-                        <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <?php
-
                     if (!empty($payments_by_month)) : ?>
-
                         <?php foreach ($payments_by_month as $month) : ?>
-
                             <div class="card mb-4">
                                 <div class="card-header d-flex justify-content-between">
                                     <strong><?php echo esc_html($month['label']); ?></strong>
