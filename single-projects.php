@@ -34,6 +34,7 @@ get_header();
                         'tasks',
                         array(
                             'data' => $tasks_query,
+                            'type' => 'long',
                         )
                     );
                     ?>        

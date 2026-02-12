@@ -78,9 +78,6 @@ get_header();
                             </div>
                         </aside>
                     </div>
-
-
-        
                 </div>
             </section>
         </div>

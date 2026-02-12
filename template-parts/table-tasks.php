@@ -8,6 +8,7 @@ defined( 'ABSPATH' ) || exit;
 
 $data = $args['data'];
 $title = $args['title'] ?? '';
+$type = $args['type'] ?? 'short';
 ?>
 
 <div class="card mb-3">
@@ -38,21 +39,25 @@ $title = $args['title'] ?? '';
                                 'id'    => get_the_ID(),
                                 'title' => get_the_title(),
                                 'link'  => get_the_permalink(),
-                                'type'  => 'short',
+                                'type'  => $type,
                             ),
                         );
                     endwhile; 
                     ?>
                 </tbody>
             </table>
-            <?php wp_reset_postdata(); ?>
-
-            <div class="text-start">
-                <a
-                    href="<?php echo esc_url( get_post_type_archive_link( 'tasks' ) ); ?>"
-                    class="btn btn-sm btn-outline-dark"
-                >Ver tareas</a>
-            </div>
+            <?php
+            wp_reset_postdata();
+            
+            if ('short' === $type) {
+               printf(
+                    '<div class="text-start">
+                        <a href="%s" class="btn btn-sm btn-outline-dark">Ver todas</a>
+                    </div>',
+                    esc_url( get_post_type_archive_link( 'tasks' ) ),
+               );
+            }
+            ?>
 
         <?php else : ?>
             <p>No hay tareas agregadas</p>

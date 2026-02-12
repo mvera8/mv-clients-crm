@@ -10,6 +10,8 @@ $id = $args['id'] ?? '';
 $title = $args['title'] ?? '';
 $link = $args['link'] ?? '';
 $type = $args['type'] ?? 'long';
+
+$project = get_field('project', $id);
 ?>
 
 <tr>
@@ -24,7 +26,6 @@ $type = $args['type'] ?? 'long';
     </td>
     <td>
         <?php
-        $project = get_field('project', $id);
         if( $project ):
             printf(
             '<a href="%s">%s</a>',
