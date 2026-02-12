@@ -9,6 +9,7 @@ defined( 'ABSPATH' ) || exit;
 $id = $args['id'] ?? '';
 $title = $args['title'] ?? '';
 $link = $args['link'] ?? '';
+$type = $args['type'] ?? 'long';
 ?>
 
 <tr>
@@ -33,14 +34,16 @@ $link = $args['link'] ?? '';
         endif;
         ?>
     </td>
-    <td>
-        <?php
+    <?php
+    if (isset($type) && $type === 'long') {
+        echo '<td>';
         $hours = get_field( 'hours', $id ) ?? '-';
         if ($hours) {
-            echo '<span class="badge rounded-pill bg-secondary">' . esc_html($hours) . '</span>';
+        echo '<span class="badge rounded-pill bg-secondary">' . esc_html($hours) . '</span>';
         }
-        ?>
-    </td>
+        echo '</td>';
+    }
+    ?>
     <td>
         <?php
         $status = get_field( 'status', $id );

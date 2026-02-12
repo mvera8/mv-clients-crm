@@ -17,12 +17,12 @@ $active_text = $args['active_text'] ?? '';
         </li>
 
         <?php
-        if ($active_link) {
+        if ( $active_link ) {
             printf(
                 '<li class="breadcrumb-item"><a href="%s">%s</a></li>',
                 
                 home_url( strtolower( $active_link ) ),
-                $active_link,
+                esc_html( ucfirst( $active_link ) ),
             );
         }
         ?>

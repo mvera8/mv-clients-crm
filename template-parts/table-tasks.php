@@ -7,11 +7,16 @@
 defined( 'ABSPATH' ) || exit;
 
 $data = $args['data'];
+$title = $args['title'] ?? '';
 ?>
 
 <div class="card mb-3">
     <div class="card-body">
-        <h4 class="card-title">Tareas</h4>
+        <?php 
+        if (isset($title) && !empty($title)) {
+            echo '<h4 class="card-title">' . esc_html( $title ) . '</h4>';
+        }
+        ?>
 
         <?php if ( $data->have_posts() ) : ?>
             <table class="table">
@@ -33,6 +38,7 @@ $data = $args['data'];
                                 'id'    => get_the_ID(),
                                 'title' => get_the_title(),
                                 'link'  => get_the_permalink(),
+                                'type'  => 'short',
                             ),
                         );
                     endwhile; 
@@ -41,8 +47,15 @@ $data = $args['data'];
             </table>
             <?php wp_reset_postdata(); ?>
 
+            <div class="text-start">
+                <a
+                    href="<?php echo esc_url( get_post_type_archive_link( 'tasks' ) ); ?>"
+                    class="btn btn-sm btn-outline-dark"
+                >Ver tareas</a>
+            </div>
+
         <?php else : ?>
-            <p>No hay datos</p>
+            <p>No hay tareas agregadas</p>
         <?php endif; ?>
     </div>
 </div>
