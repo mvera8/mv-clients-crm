@@ -25,16 +25,18 @@ get_header();
                     ?>
                     
                     <div class="row">
-                        <div class="col-8">
-                            <?php 
-                            if ($paid) : ?>
-                                <div class="alert alert-success" role="alert">
-                                    💰 Esta tarea ya fue pagada.
+                        <div class="col-9">
+                            <?php                            
+                            if ($payment_status === "1") : ?>
+                                <div class="alert alert-success d-flex justify-content-between align-items-center" role="alert">
+                                    <span>💰 Esta tarea fue pagada</span>
+                                    <?php if ($payment_amount) : ?>
+                                        <strong>USD <?php echo number_format($payment_amount); ?></strong>
+                                    <?php endif; ?>
                                 </div>
                             <?php endif; ?>
 
-
-                            <div class="task-description card">
+                            <div class="task-description card border-0 mb-3 shadow-sm">
                                 <div class="card-body">
                                     <?php
                                     echo '<h2>Descripción:</h2>';
@@ -44,8 +46,19 @@ get_header();
                             </div>
                         </div>
 
-                        <aside class="col-4">
-                            <div class="widget card">
+                        <aside class="col-3">
+                            <?php
+                            get_template_part(
+                                'template-parts/card',
+                                'number',
+                                array(
+                                    'title' => 'Horas metidas',
+                                    'total' => $hours,
+                                    'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clock"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 7v5l3 3" /></svg>'
+                                )
+                            );
+                            ?>
+                            <div class="widget card border-0 shadow-sm">
                                 <div class="card-body">
                                     <?php
                                     if ($status) {
@@ -70,8 +83,10 @@ get_header();
                                     <hr />
 
                                     <p><b>Branch</b></p>
-                                    <code id="branch-text" class="bg-light d-block p-2 mb-2 overflow-auto"><?php echo $branch; ?></code>
-                                    <button class="btn btn-sm btn-outline-secondary" onclick="copyToClipboard('branch-text')">
+                                    <code id="branch-text" class="bg-light d-block p-2 mb-2 overflow-auto">
+                                        <?php echo $branch; ?> 
+                                    </code>
+                                    <button id="copy-button" class="btn btn-sm btn-outline-secondary" onclick="copyToClipboard('branch-text')">
                                         Copiar
                                     </button>
                                 </div>
@@ -86,17 +101,18 @@ get_header();
 
 <script>
 function copyToClipboard(elementId) {
-    const text = document.getElementById(elementId).innerText;
+    const copyButton = document.getElementById('copy-button');
+    const copyText = document.getElementById('branch-text');
+    const text = copyText.innerText;
     navigator.clipboard.writeText(text).then(() => {
-        const btn = event.target;
-        const originalText = btn.innerText;
-        btn.innerText = '¡Copiado!';
-        btn.classList.replace('btn-outline-secondary', 'btn-success');
+        const originalText = copyButton.innerText;
+        copyButton.innerText = '¡Copiado!';
+        copyButton.classList.replace('btn-outline-secondary', 'btn-success');
         
         setTimeout(() => {
-            btn.innerText = originalText;
-            btn.classList.replace('btn-success', 'btn-outline-secondary');
-        }, 2000);
+            copyButton.innerText = originalText;
+            copyButton.classList.replace('btn-success', 'btn-outline-secondary');
+        }, 1000);
     }).catch(err => {
         console.error('Error al copiar: ', err);
     });

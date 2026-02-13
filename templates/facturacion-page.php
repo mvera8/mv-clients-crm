@@ -40,7 +40,7 @@ get_header();
                                 'number',
                                 array(
                                     'title' => 'Total cobrado',
-                                    'total' => 'USD ' . number_format($payments_total),
+                                    'total' => 'USD ' . number_format($payments_total_paid),
                                 )
                             );
                             ?>
@@ -51,20 +51,31 @@ get_header();
                                 'template-parts/card',
                                 'number',
                                 array(
-                                    'title' => 'Pendiente',
-                                    'total' => 'USD ' . number_format($payments_pending_total),
+                                    'title' => 'Total pendiente',
+                                    'total' => 'USD ' . number_format($payments_total_pending),
                                 )
                             );
                             ?>
                         </div>
-                        <div class="col-12 col-md-6">
-                            <div class="card mb-4">
+                        <div class="col-12 col-md-3">
+                            <?php
+                            get_template_part(
+                                'template-parts/card',
+                                'number',
+                                array(
+                                    'title' => 'Total cotizado',
+                                    'total' => 'USD ' . number_format($payments_total_quoted),
+                                )
+                            );
+                            ?>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="card border-0 shadow-sm 3">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-end mb-2">
-                                        <h3 class="mb-0">USD <?php echo number_format($payments_current_month); ?> <span class="text-body-secondary fs-6">Este mes</small></h3>
+                                        <h3 class="mb-0">USD <?php echo number_format($payments_current_month_paid); ?></h3>
                                         <p class="mb-0">Meta: USD <?php echo number_format($payments_current_month_goal); ?></p>
                                     </div>
-                                    
 
                                     <div class="progress">
                                         <div 
@@ -76,7 +87,6 @@ get_header();
                                             aria-valuemax="100">
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -85,7 +95,7 @@ get_header();
                     <?php
                     if (!empty($payments_by_month)) : ?>
                         <?php foreach ($payments_by_month as $month) : ?>
-                            <div class="card mb-4">
+                            <div class="card 3">
                                 <div class="card-header d-flex justify-content-between">
                                     <strong><?php echo esc_html($month['label']); ?></strong>
                                     <span>Total cobrado: 
@@ -100,8 +110,17 @@ get_header();
                                         <li class="list-group-item d-flex justify-content-between">
                                             <span>
                                                 <?php echo esc_html($item['title']); ?>
-                                                <?php if (!$item['paid']) : ?>
-                                                    <span class="badge bg-warning text-dark ms-2">Pendiente</span>
+                                                <?php if ($item['status'] !== 'pagado') : ?>
+                                                    <?php
+                                                    $badge_class = match ($item['status']) {
+                                                        'pendiente' => 'bg-warning text-dark',
+                                                        'cotizado'  => 'bg-info text-dark',
+                                                        default     => 'bg-secondary'
+                                                    };
+                                                    ?>
+                                                    <span class="badge <?php echo esc_attr($badge_class); ?> ms-2">
+                                                        <?php echo esc_html(ucfirst($item['status'])); ?>
+                                                    </span>
                                                 <?php endif; ?>
                                             </span>
                                             <span>

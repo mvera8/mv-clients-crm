@@ -44,8 +44,10 @@ get_header();
                                     'template-parts/card',
                                     'number',
                                     array(
-                                        'title' => $card['title'],
-                                        'total' => $card['total'],
+                                        'title' => $card['title'] ?? '',
+                                        'total' => $card['total'] ?? '',
+                                        'icon'  => $card['icon'] ?? '',
+                                        'color' => $card['color'] ?? '',
                                     )
                                 );
                                 ?>

@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_6988de78a6fd3",
-            "label": "client",
+            "label": "Cliente",
             "name": "client",
             "aria-label": "",
             "type": "post_object",
@@ -54,10 +54,10 @@
         },
         {
             "key": "field_698cc867b3337",
-            "label": "pagada",
-            "name": "pagada",
+            "label": "Estado",
+            "name": "status",
             "aria-label": "",
-            "type": "true_false",
+            "type": "select",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -66,12 +66,21 @@
                 "class": "",
                 "id": ""
             },
-            "message": "",
-            "default_value": 0,
+            "choices": {
+                "cotizado": "Cotizado",
+                "pendiente": "Pendiente",
+                "pagado": "Pagado"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
             "allow_in_bindings": 0,
             "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_6988de8fa6fd4",
@@ -125,5 +134,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770834622
+    "modified": 1771002794
 }

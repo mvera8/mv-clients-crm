@@ -8,11 +8,19 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+$payments_total_paid = 0;
+$payments_total_pending = 0;
+$payments_total_quoted = 0;
+
+$payments_current_month_paid = 0;
+$payments_current_month_pending = 0;
+$payments_current_month_quoted = 0;
+
+
 $payments_total = 0;
 $payments_current_month = 0;
 $payments_current_month_goal = 2500;
 $payments_pending_total = 0;
-$payments_current_month_pending = 0;
 $current_month_key = date('Y-m');
 
 $payments_args = array(
@@ -37,41 +45,52 @@ if ( $payments_query->have_posts() ) {
         $month_label = get_the_date('F Y'); // February 2026
 
         $amount = (float) get_field('amount');
-        $paid   = get_field('pagada');
+        $status = strtolower(get_field('status')); // pagado | pendiente | cotizado
+
 
         $payments_by_month[$month_key]['label'] = $month_label;
         $payments_by_month[$month_key]['items'][] = array(
             'title'  => get_the_title(),
             'amount' => $amount,
-            'paid'   => $paid,
+            'status' => $status,
         );
 
         if (!isset($payments_by_month[$month_key]['total'])) {
             $payments_by_month[$month_key]['total'] = 0;
         }
 
-        if ($paid) {
+        switch ($status) {
 
-            // Total histórico cobrado
-            $payments_total += $amount;
+            case 'pagado':
 
-            // Total por mes cobrado
-            $payments_by_month[$month_key]['total'] += $amount;
+                $payments_total_paid += $amount;
+                $payments_by_month[$month_key]['total'] += $amount;
 
-            // Total mes actual cobrado
-            if ($month_key === $current_month_key) {
-                $payments_current_month += $amount;
-            }
+                if ($month_key === $current_month_key) {
+                    $payments_current_month_paid += $amount;
+                }
 
-        } else {
+                break;
 
-            // Total pendiente histórico
-            $payments_pending_total += $amount;
+            case 'pendiente':
 
-            // Total pendiente mes actual
-            if ($month_key === $current_month_key) {
-                $payments_current_month_pending += $amount;
-            }
+                $payments_total_pending += $amount;
+
+                if ($month_key === $current_month_key) {
+                    $payments_current_month_pending += $amount;
+                }
+
+                break;
+
+            case 'cotizado':
+
+                $payments_total_quoted += $amount;
+
+                if ($month_key === $current_month_key) {
+                    $payments_current_month_quoted += $amount;
+                }
+
+                break;
         }
     }
 
@@ -83,7 +102,6 @@ $progress_percentage = 0;
 if ($payments_current_month_goal > 0) {
     $progress_percentage = min(
         100,
-        ($payments_current_month / $payments_current_month_goal) * 100
+        ($payments_current_month_paid / $payments_current_month_goal) * 100
     );
 }
-
