@@ -10,7 +10,7 @@ $data = $args['data'];
 $title = $args['title'] ?? '';
 ?>
 
-<div class="card mb-3">
+<div class="card border-0 mb-3 shadow-sm">
     <div class="card-body">
        <?php 
         if (isset($title) && !empty($title)) {
