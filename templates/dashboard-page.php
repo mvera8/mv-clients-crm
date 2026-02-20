@@ -17,12 +17,12 @@ get_header();
     <div class="row">
         <?php get_template_part('template-parts/dashboard-sidebar'); ?>
 
-       <div class="col-12 col-md-10">
+        <div class="col-12 col-md-10">
             <section id="dashboard-content" class="py-4 bg-light min-vh-100">
                 <div class="container">
                     <?php
                     printf(
-                        '<p class="text-muted mb-0">Bienvenido <b>%s</b></p>',
+                        '<p class="text-muted mb-3">Bienvenido <b>%s</b></p>',
                         $user_name,
                     );
 
@@ -54,7 +54,7 @@ get_header();
                             </div>
                         <?php endforeach; ?>
                     
-                        <div class="col-md-5">
+                        <div class="col-md-5 mb-3">
                             <?php
                             get_template_part(
                                 'template-parts/table',
@@ -66,13 +66,25 @@ get_header();
                             ?>
                         </div>
 
-                        <div class="col-md-7">
+                        <div class="col-md-7 mb-3">
                             <?php   
                             get_template_part(
                                 'template-parts/table',
                                 'tasks',
                                 array(
                                     'data' => $tasks_query,
+                                )
+                            );
+                            ?>
+                        </div>
+
+                        <div class="col-12 mb-3">
+                            <?php
+                            get_template_part(
+                                'template-parts/table',
+                                'projects',
+                                array(
+                                    'data' => $project_query,
                                 )
                             );
                             ?>

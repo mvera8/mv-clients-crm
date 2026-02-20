@@ -12,6 +12,10 @@ $link = $args['link'] ?? '';
 $type = $args['type'] ?? 'long';
 
 $project = get_field('project', $id);
+$priority = get_field( 'priority', $id );
+
+$task_status = get_the_terms( $id, 'task_status' );
+$task_priority = get_the_terms( $id, 'task_priority' );
 ?>
 
 <tr>
@@ -40,25 +44,29 @@ $project = get_field('project', $id);
         echo '<td>';
         $hours = get_field( 'hours', $id ) ?? '-';
         if ($hours) {
-        echo '<span class="badge rounded-pill bg-secondary">' . esc_html($hours) . '</span>';
+            echo '<span class="badge rounded-pill bg-secondary">' . esc_html($hours) . '</span>';
         }
         echo '</td>';
     }
     ?>
     <td>
         <?php
-        $status = get_field( 'status', $id );
-        if ($status) {
-            echo mv_status_tag($status);
+        if ( $task_status && ! is_wp_error( $task_status ) ) {
+            foreach ( $task_status as $st ) {
+                echo mv_status_tag($st->name);
+            }
         }
         ?>
     </td>
-    <td>
-        <?php
-        $priority = get_field( 'priority', $id );
-        if ($priority) {
-            echo mv_priority_tag($priority);
+    <?php
+    if (isset($type) && $type === 'long') {
+        echo '<td>';
+        if ( $task_priority && ! is_wp_error( $task_priority ) ) {
+            foreach ( $task_priority as $st ) {
+                echo mv_priority_tag($st->name);
+            }
         }
-        ?>
-    </td>
+        echo '</td>';
+    }
+    ?>
 </tr>

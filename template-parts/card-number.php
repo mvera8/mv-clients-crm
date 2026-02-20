@@ -26,7 +26,7 @@ $color = $args['color'] ?? 'secondary';
             if (isset( $icon ) && $icon ) {
                 ?>
                 <div class="rounded text-<?php echo esc_attr( $color ); ?> bg-<?php echo esc_attr( $color ); ?>-subtle p-3">
-                    <?php echo $icon; ?>
+                    <?php echo mv_icon_selector($icon); ?>
                 </div>
                 <?php
             }

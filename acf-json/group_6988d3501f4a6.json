@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_6988d350bd903",
-            "label": "client_email",
+            "label": "Email",
             "name": "client_email",
             "aria-label": "",
             "type": "text",
@@ -24,68 +24,8 @@
             "append": ""
         },
         {
-            "key": "field_6988d37408ad0",
-            "label": "client_phone",
-            "name": "client_phone",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_6988d37fcddb0",
-            "label": "client_company",
-            "name": "client_company",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_698de3fef1c5c",
-            "label": "client_company_website",
-            "name": "client_company_webiste",
-            "aria-label": "",
-            "type": "url",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "allow_in_bindings": 0,
-            "placeholder": ""
-        },
-        {
             "key": "field_698cbdb023ebd",
-            "label": "client_contact_type",
+            "label": "Contactado por",
             "name": "client_contact_type",
             "aria-label": "",
             "type": "select",
@@ -133,5 +73,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770906637
+    "modified": 1771601124
 }

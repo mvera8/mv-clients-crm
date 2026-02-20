@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_6988dbd25cf9d",
-            "label": "project",
+            "label": "Projecto",
             "name": "project",
             "aria-label": "",
             "type": "post_object",
@@ -26,67 +26,6 @@
             "bidirectional": 0,
             "ui": 1,
             "bidirectional_target": []
-        },
-        {
-            "key": "field_6988dc155cf9f",
-            "label": "status",
-            "name": "status",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "pendiente": "Pendiente",
-                "en_proceso": "En Proceso",
-                "completada": "Completada",
-                "cancelada": "Cancelada"
-            },
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
-            "key": "field_6988dc515cfa0",
-            "label": "priority",
-            "name": "priority",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "baja": "Baja",
-                "media": "Media",
-                "alta": "Alta"
-            },
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
         },
         {
             "key": "field_698b7111969e7",
@@ -131,5 +70,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770832615
+    "modified": 1771600547
 }

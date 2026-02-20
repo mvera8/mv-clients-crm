@@ -12,6 +12,7 @@ $link = $args['link'] ?? '';
 
 $client = get_field( 'client', $id ) ?? '';
 $website = get_field( 'website', $id ) ?? '';
+$types = get_the_terms( $id, 'project_type' );
 ?>
 
 <tr>
@@ -35,12 +36,19 @@ $website = get_field( 'website', $id ) ?? '';
     <td>
         <?php
         if( $client ):
-            printf(
-            '<a href="%s">%s</a>',
-                esc_url( get_permalink( $client->ID ) ),
-                esc_html( $client->post_title ),
-            );
+            echo esc_html( $client->post_title );
+        else:
+            echo '-';
         endif;
+        ?>
+    </td>
+    <td>
+        <?php
+        if ( $types && ! is_wp_error( $types ) ) {
+            foreach ( $types as $type ) {
+                echo '<span class="badge bg-secondary me-1">' . esc_html( $type->name ) . '</span>';
+            }
+        }
         ?>
     </td>
 </tr>

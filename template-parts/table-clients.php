@@ -7,16 +7,11 @@
 defined( 'ABSPATH' ) || exit;
 
 $data = $args['data'];
-$title = $args['title'] ?? '';
 ?>
 
-<div class="card border-0 mb-3 shadow-sm">
+<div class="card border-0 shadow-sm h-100">
     <div class="card-body">
-       <?php 
-        if (isset($title) && !empty($title)) {
-            echo '<h4 class="card-title">' . esc_html( $title ) . '</h4>';
-        }
-        ?>
+       <h4 class="card-title mb-2 text-uppercase fs-6">Clintes que pagaron</h4>
 
         <?php if ( $data->have_posts() ) : ?>
         <table class="table">          

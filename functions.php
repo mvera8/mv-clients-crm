@@ -11,11 +11,18 @@ $includes = array(
   '/title-tag.php',
   '/custom-logo.php',
   '/mv-custom-post-type-clients.php',
+  '/mv-custom-taxonomy-clients.php',
   '/mv-custom-post-type-projects.php',
+  '/mv-custom-taxonomy-projects.php',
   '/mv-custom-post-type-tasks.php',
+  '/mv-custom-taxonomy-tasks.php',
   '/mv-custom-post-type-payments.php',
+  '/mv-cpt-columns-tasks.php',
   '/mv-count-cpt.php',
   '/mv-tags.php',
+  '/mv-filter-query.php',
+  '/mv-icon-selector.php',
+  '/mv-payment-helpers.php',
 );
 
 foreach ( $includes as $file ) {
