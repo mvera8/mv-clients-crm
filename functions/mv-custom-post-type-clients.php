@@ -20,46 +20,20 @@ function crear_cpt_clients() {
     $args = array(
         'labels'                => $labels,
         'description'           => 'Gestión de clientes del CRM',
-        'public'                => true,
-        'publicly_queryable'    => true,
+        'public'                => false,
+        'publicly_queryable'    => false,
         'show_ui'               => true,
         'show_in_menu'          => true,
-        'query_var'             => true,
-        'rewrite'               => array('slug' => 'clientes'),
-        'capability_type'       => 'post',
-        'has_archive'           => true,
+        'query_var'             => false,
+        'rewrite'               => false,
+        'has_archive'           => false,
         'hierarchical'          => false,
         'menu_position'         => 5,
         'menu_icon'             => 'dashicons-groups',
-        'supports'              => array('title', 'editor', 'custom-fields'),
+        'supports'              => array('title', 'custom-fields'),
         'show_in_rest'          => true, // Para soporte de Gutenberg
     );
 
     register_post_type('clients', $args);
 }
 add_action('init', 'crear_cpt_clients');
-
-// Opcional: Agregar columnas personalizadas en la lista de clientes
-function clients_custom_columns($columns) {
-    $new_columns = array(
-        'cb' => $columns['cb'],
-        'title' => 'Cliente',
-        'email' => 'Email',
-        'empresa' => 'Empresa',
-        'date' => 'Fecha'
-    );
-    return $new_columns;
-}
-add_filter('manage_clients_posts_columns', 'clients_custom_columns');
-
-function clients_custom_column_content($column, $post_id) {
-    switch ($column) {
-        case 'email':
-            echo get_post_meta($post_id, 'client_email', true);
-            break;
-        case 'empresa':
-            echo get_post_meta($post_id, 'client_company', true);
-            break;
-    }
-}
-add_action('manage_clients_posts_custom_column', 'clients_custom_column_content', 10, 2);

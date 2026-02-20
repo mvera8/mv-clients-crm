@@ -11,7 +11,7 @@ $title = $args['title'] ?? '';
 $type = $args['type'] ?? 'short';
 ?>
 
-<div class="card border-0 mb-3 shadow-sm">
+<div class="card border-0 shadow-sm h-100">
     <div class="card-body">
         <?php 
         if (isset($title) && !empty($title)) {
@@ -25,8 +25,17 @@ $type = $args['type'] ?? 'short';
                     <tr>
                         <th>Titulo</th>
                         <th>Projecto</th>
+                        <?php 
+                        if ('long' === $type) {
+                            echo '<th>Horas</th>';
+                        }
+                        ?>
                         <th>Estado</th>
-                        <th>Prioridad</th>
+                        <?php 
+                        if ('long' === $type) {
+                            echo '<th>Prioridad</th>';
+                        }
+                        ?>
                     </tr>
                 </thead>
                 <tbody>

@@ -31,7 +31,7 @@
         },
         {
             "key": "field_6988deb4a6fd5",
-            "label": "amount",
+            "label": "Cantidad",
             "name": "amount",
             "aria-label": "",
             "type": "number",
@@ -69,7 +69,10 @@
             "choices": {
                 "cotizado": "Cotizado",
                 "pendiente": "Pendiente",
-                "pagado": "Pagado"
+                "pagado": "Pagado",
+                "enviado": "Enviado",
+                "rechazado": "Rechazado",
+                "trabajando": "Trabajando"
             },
             "default_value": false,
             "return_format": "value",
@@ -84,7 +87,7 @@
         },
         {
             "key": "field_6988de8fa6fd4",
-            "label": "task",
+            "label": "Tarea",
             "name": "task",
             "aria-label": "",
             "type": "relationship",
@@ -134,5 +137,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771002794
+    "modified": 1771608446
 }
