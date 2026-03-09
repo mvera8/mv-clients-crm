@@ -62,17 +62,18 @@ $clients_query = new WP_Query($clients_args);
 
 $tasks_args = array(
     'post_type'      => 'tasks',
-    'posts_per_page' => 4,
+    'posts_per_page' => -1,
     'orderby'        => 'date',
     'order'          => 'DESC',
     'no_found_rows'  => true,
     'update_post_meta_cache' => false,
     'update_post_term_cache' => false,
-    'meta_query' => array(
+    'tax_query' => array(
         array(
-            'key'     => 'status',
-            'value'   => array('completada', 'Completada'),
-            'compare' => 'NOT IN'
+            'taxonomy' => 'task_status',
+            'field'    => 'slug',        // o 'name' si preferís
+            'terms'    => array('completada'),
+            'operator' => 'NOT IN',
         )
     )
 );
