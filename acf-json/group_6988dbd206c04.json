@@ -16,7 +16,9 @@
                 "class": "",
                 "id": ""
             },
-            "post_type": "",
+            "post_type": [
+                "projects"
+            ],
             "post_status": "",
             "taxonomy": "",
             "return_format": "object",
@@ -70,5 +72,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771600547
+    "modified": 1773084323
 }
