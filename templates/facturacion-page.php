@@ -95,7 +95,7 @@ get_header();
                     <?php
                     if (!empty($payments_by_month)) : ?>
                         <?php foreach ($payments_by_month as $month) : ?>
-                            <div class="card 3">
+                            <div class="card mb-4">
                                 <div class="card-header d-flex justify-content-between">
                                     <strong><?php echo esc_html($month['label']); ?></strong>
                                     <span>Total cobrado: 
