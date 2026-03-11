@@ -66,29 +66,6 @@
             "default_value": "",
             "allow_in_bindings": 0,
             "placeholder": ""
-        },
-        {
-            "key": "field_6988da0bfa9c0",
-            "label": "Presupuesto (USD)",
-            "name": "project_presupuesto",
-            "aria-label": "",
-            "type": "number",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": 0,
-            "min": 0,
-            "max": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "step": "",
-            "prepend": "",
-            "append": ""
         }
     ],
     "location": [
@@ -110,5 +87,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771002400
+    "modified": 1773246639
 }

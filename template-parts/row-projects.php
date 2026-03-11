@@ -27,10 +27,14 @@ $types = get_the_terms( $id, 'project_type' );
     </th>
     <td>
         <?php
-        printf(
-            '<a href="%1$s" target="_blank">%1$s</a>',
-            esc_url($website)
-        );
+        if ( $website) {
+            printf(
+                '<a href="%1$s" target="_blank">%1$s</a>',
+                esc_url($website)
+            );
+        } else {
+            echo '-';
+        }
         ?>
     </td>
     <td>

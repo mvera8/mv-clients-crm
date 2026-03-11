@@ -73,6 +73,7 @@ if ( $payments_query->have_posts() ) {
                 break;
 
             case 'pendiente':
+            case 'trabajando':
 
                 $payments_total_pending += $amount;
 
