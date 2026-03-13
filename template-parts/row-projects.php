@@ -50,7 +50,7 @@ $types = get_the_terms( $id, 'project_type' );
         <?php
         if ( $types && ! is_wp_error( $types ) ) {
             foreach ( $types as $type ) {
-                echo '<span class="badge bg-secondary me-1">' . esc_html( $type->name ) . '</span>';
+                echo '<span class="badge bg-warning me-1">' . esc_html( $type->name ) . '</span>';
             }
         }
         ?>

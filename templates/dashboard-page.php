@@ -78,7 +78,7 @@ get_header();
                             ?>
                         </div>
 
-                        <div class="col-12 mb-3">
+                        <div class="col-12 col-md-9 mb-3">
                             <?php
                             get_template_part(
                                 'template-parts/table',
@@ -87,6 +87,24 @@ get_header();
                                     'data' => $project_query,
                                 )
                             );
+                            ?>
+                        </div>
+
+                        <div class="col-12 col-md-3 mb-3">
+                            <?php    
+                            foreach ($cfg as $key => $value) {
+                                get_template_part(
+                                    'template-parts/card',
+                                    'number',
+                                    array(
+                                        'title'  => $key,
+                                        'total'  => $value,
+                                        'icon'   => $key,
+                                        'color'  => 'dark',
+                                        'footer' => $key === 'facebook' ? 'https://facebook.com/martinverauy' : 'https://instagram.com/martinverauy/',
+                                    )
+                                );
+                            }
                             ?>
                         </div>
                     </div>

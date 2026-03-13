@@ -8,6 +8,7 @@ $includes = array(
   '/preload.php',
   '/svg.php',
   '/theme-setup.php',
+  '/theme-options.php',
   '/title-tag.php',
   '/custom-logo.php',
   '/mv-custom-post-type-clients.php',

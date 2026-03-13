@@ -8,6 +8,8 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+$cfg = tincho_get_settings();
+
 $current_user = wp_get_current_user();
 $user_name = $current_user->user_login;
 
@@ -23,7 +25,7 @@ $project_args = array(
         array(
             'taxonomy' => 'project_type',
             'field'    => 'slug',
-            'terms'    => 'interno',
+            'terms'    => 'show',
         ),
     ),
 );
@@ -71,7 +73,7 @@ $tasks_args = array(
     'tax_query' => array(
         array(
             'taxonomy' => 'task_status',
-            'field'    => 'slug',        // o 'name' si preferís
+            'field'    => 'slug',
             'terms'    => array('completada'),
             'operator' => 'NOT IN',
         )
@@ -84,11 +86,11 @@ $total_payments_amount = 0;
 $payments_args = array(
     'post_type'      => 'payments',
     'posts_per_page' => -1,
-    'fields'         => 'ids', // 🔥 optimización importante
+    'fields'         => 'ids',
     'meta_query'     => array(
         array(
-            'key'     => 'pagada',
-            'value'   => '1', // True/False guarda "1"
+            'key'     => 'status',
+            'value'   => 'pagado',
             'compare' => '=',
         ),
     ),
@@ -123,7 +125,7 @@ $cards = array(
         'color' => 'info',
     ),
     array(
-        'title' => contar_posts_por_tipo('payments', array( array( 'key' => 'pagada', 'value' => '1', 'compare' => '='))) . ' Pago/s',
+        'title' => contar_posts_por_tipo('payments', array( array( 'key' => 'status', 'value' => 'pagado', 'compare' => '='))) . ' Pago/s',
         'total' => 'USD ' . number_format($total_payments_amount, 0),
         'icon'  => 'money',
         'color' => $total_payments_amount >= 0 ? 'success' : 'danger'
