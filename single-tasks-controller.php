@@ -6,9 +6,10 @@ $task_id = get_the_ID();
 $branch = get_post_meta( $task_id, 'branch', true );
 $branch = $branch ? $branch : 'MV-' . $task_id . '-' . get_post_field( 'post_name' );
 
-$status = get_field( 'status', $task_id ) ?: 'pending';
-$priority = get_field( 'priority', $task_id ) ?: 'pending';
+$status_terms = get_the_terms($task_id, 'task_status');
+$status = (!is_wp_error($status_terms) && !empty($status_terms)) ? reset($status_terms)->name : null;
 
+$priority = get_field( 'priority', $task_id ) ?: 'pending';
 $project = get_field( 'project', $task_id );
 $hours   = get_field( 'hours', $task_id );
 

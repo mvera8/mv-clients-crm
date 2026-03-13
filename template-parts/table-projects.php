@@ -11,7 +11,7 @@ $data = $args['data'];
 
 <div class="card border-0 mb-3 shadow-sm">
     <div class="card-body">
-        <h4 class="card-title mb-2 text-uppercase fs-6">Proyectos internos</h4>
+        <h4 class="card-title mb-2 text-uppercase fs-6">Showroom</h4>
         <?php if ( $data->have_posts() ) : ?>
             <table class="table">          
                 <tbody>
@@ -24,7 +24,6 @@ $data = $args['data'];
                                 'id'    => get_the_ID(),
                                 'title' => get_the_title(),
                                 'link'  => get_permalink(),
-                                // 'type'  => 'short',
                             ]
                         );
                     endwhile; 

@@ -7,6 +7,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $title = $args['title'] ?? '';
+$footer = $args['footer'] ?? '';
 $total = $args['total'] ?? '';
 $icon  = $args['icon'] ?? '';
 $color = $args['color'] ?? 'secondary';
@@ -25,7 +26,7 @@ $color = $args['color'] ?? 'secondary';
             <?php
             if (isset( $icon ) && $icon ) {
                 ?>
-                <div class="rounded text-<?php echo esc_attr( $color ); ?> bg-<?php echo esc_attr( $color ); ?>-subtle p-3">
+                <div class="rounded text-<?php echo esc_attr( $color ); ?> bg-<?php echo esc_attr( $color ); ?>-subtle p-2">
                     <?php echo mv_icon_selector($icon); ?>
                 </div>
                 <?php
@@ -33,4 +34,21 @@ $color = $args['color'] ?? 'secondary';
             ?>
         </div>
     </div>
+    <?php
+    if (isset( $footer ) && $footer ) {
+        ?>
+        <div class="card-footer">
+            <?php
+            // if footer is a URL, wrap in anchor and remove protocol for display
+            $footer_url = str_replace(array('http://', 'https://'), '', $footer);
+            if (filter_var($footer, FILTER_VALIDATE_URL)) {
+                echo '<a href="' . esc_url( $footer ) . '" target="_blank" rel="noopener noreferrer">' . esc_html( $footer_url ) . '</a>';
+            } else {
+                echo esc_html( $footer );
+            }
+            ?>
+        </div>
+        <?php
+    }
+    ?>
 </div>
