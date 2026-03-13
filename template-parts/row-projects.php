@@ -50,7 +50,9 @@ $types = get_the_terms( $id, 'project_type' );
         <?php
         if ( $types && ! is_wp_error( $types ) ) {
             foreach ( $types as $type ) {
-                echo '<span class="badge bg-warning me-1">' . esc_html( $type->name ) . '</span>';
+                // get tag_color field value that is a color picker in a taxonomy
+                $tag_color = get_term_meta( $type->term_id, 'tag_color', true );
+                echo '<span class="badge ms-1" style="background-color: ' . ( $tag_color ? esc_attr( $tag_color ) : 'gray') . ';">' . esc_html( $type->name ) . '</span>';
             }
         }
         ?>
