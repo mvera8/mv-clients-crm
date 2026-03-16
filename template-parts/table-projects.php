@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 $data = $args['data'];
 ?>
 
-<div class="card border-0 mb-3 shadow-sm">
+<div class="card border-0 shadow-sm h-100">
     <div class="card-body">
         <h4 class="card-title mb-2 text-uppercase fs-6">Showroom</h4>
         <?php if ( $data->have_posts() ) : ?>
