@@ -48,20 +48,6 @@ $items = [
 ];
 ?>
 
-<?php if ( $status && isset( $messages[ $status ] ) ) : ?>
-    <div class="alert <?php echo esc_attr( $messages[ $status ]['class'] ); ?> mx-3 mt-3" role="alert">
-        <?php echo esc_html( $messages[ $status ]['text'] ); ?>
-    </div>
-<?php endif; ?>
-
-<div class="px-3 mb-3">
-	<div class="border-top border-bottom py-3">
-		<button type="button" class="btn btn-primary btn-lg w-100 d-block" data-bs-toggle="modal" data-bs-target="#addItemModal">
-			Agregar Item
-		</button>
-	</div>
-</div>
-
 <!-- Modal -->
 <div
     class="modal fade"

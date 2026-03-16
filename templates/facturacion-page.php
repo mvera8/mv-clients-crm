@@ -72,6 +72,7 @@ get_header();
                         <div class="col-12 col-md-6">
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body">
+
                                     <div class="row align-items-end g-1">
                                         <?php
                                         if (!empty($payments_by_month)) :
@@ -81,10 +82,14 @@ get_header();
                                                         <div
                                                         class="p-1 bg-success rounded w-100"
                                                         style="height: %spx;"
+                                                        data-bs-toggle="tooltip"
+                                                        data-bs-placement="top"
+                                                        data-bs-title="%s"
                                                         ></div>
                                                         <p class="text-muted mb-0 mt-1 small text-uppercase">%s</p>
                                                     </div>',
                                                     $month['total']/4,
+                                                    'USD ' . number_format($month['total']),
                                                     substr($month['label'], 0, 3)
                                                 );
                                             endforeach;
