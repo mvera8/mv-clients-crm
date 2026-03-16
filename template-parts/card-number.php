@@ -12,7 +12,7 @@ $total = $args['total'] ?? '';
 $icon  = $args['icon'] ?? '';
 $color = $args['color'] ?? 'secondary';
 ?>
-<div class="card border-0 mb-3 shadow-sm">
+<div class="card border-0 shadow-sm">
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-start">
             <div>
@@ -26,7 +26,7 @@ $color = $args['color'] ?? 'secondary';
             <?php
             if (isset( $icon ) && $icon ) {
                 ?>
-                <div class="rounded text-<?php echo esc_attr( $color ); ?> bg-<?php echo esc_attr( $color ); ?>-subtle p-2">
+                <div class="rounded text-<?php echo esc_attr( $color ); ?> bg-<?php echo esc_attr( $color ); ?>-subtle p-1">
                     <?php echo mv_icon_selector($icon); ?>
                 </div>
                 <?php

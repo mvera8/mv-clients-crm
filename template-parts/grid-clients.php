@@ -29,9 +29,9 @@ if ( $data->have_posts() ) :
             ),
         ));
         ?>
-        <div class="col-12 col-md-4">
-            <div class="card border-0 mb-3 shadow-sm">
-                <div class="card-body">
+        <div class="col-12 col-md-4 pb-4">
+            <div class="card border-0 mb-3 shadow-sm h-100">
+                <div class="card-body pb-0">
                     <div class="d-flex justify-content-start align-items-start gap-3">
                         <span class="rounded text-primary bg-primary-subtle p-3">
                             <?php echo mv_icon_selector($client_contact_type); ?>

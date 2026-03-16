@@ -9,9 +9,15 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<aside class="col-12 col-md-2">
-    <?php
-    get_template_part('template-parts/logo');
-    get_template_part('template-parts/dashboard-menu');
-    ?>
+<aside id="dashboard-sidebar" class="col-12 col-md-2 position-relative">
+    <div class="sticky">
+        <?php
+        get_template_part('template-parts/logo');
+        get_template_part('template-parts/modal-button');
+        get_template_part('template-parts/dashboard-menu');
+        ?>
+    </div>
 </aside>
+
+<?php
+get_template_part('template-parts/modal');

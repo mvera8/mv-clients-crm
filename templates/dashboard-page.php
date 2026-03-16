@@ -22,7 +22,7 @@ get_header();
                 <div class="container">
                     <?php
                     printf(
-                        '<p class="text-muted mb-3">Bienvenido <b>%s</b></p>',
+                        '<p class="text-muted">Bienvenido <b>%s</b></p>',
                         $user_name,
                     );
 
@@ -35,7 +35,7 @@ get_header();
                         )
                     );
                     ?>
-                    <div class="row">
+                    <div class="row g-3">
 
                         <?php foreach ($cards as $card) : ?>
                             <div class="col-md-3">
@@ -54,7 +54,7 @@ get_header();
                             </div>
                         <?php endforeach; ?>
                     
-                        <div class="col-md-5 mb-3">
+                        <div class="col-md-5">
                             <?php
                             get_template_part(
                                 'template-parts/table',
@@ -66,7 +66,7 @@ get_header();
                             ?>
                         </div>
 
-                        <div class="col-md-7 mb-3">
+                        <div class="col-md-7">
                             <?php   
                             get_template_part(
                                 'template-parts/table',
@@ -78,7 +78,7 @@ get_header();
                             ?>
                         </div>
 
-                        <div class="col-12 col-md-9 mb-3">
+                        <div class="col-12 col-md-8">
                             <?php
                             get_template_part(
                                 'template-parts/table',
@@ -90,23 +90,20 @@ get_header();
                             ?>
                         </div>
 
-                        <div class="col-12 col-md-3 mb-3">
-                            <?php    
-                            foreach ($cfg as $key => $value) {
-                                get_template_part(
-                                    'template-parts/card',
-                                    'number',
-                                    array(
-                                        'title'  => $key,
-                                        'total'  => $value,
-                                        'icon'   => $key,
-                                        'color'  => 'dark',
-                                        'footer' => $key === 'facebook' ? 'https://facebook.com/martinverauy' : 'https://instagram.com/martinverauy/',
-                                    )
-                                );
-                            }
-                            ?>
-                        </div>
+                        <?php    
+                        foreach ($cfg as $key => $value) {
+                            echo '<div class="col-12 col-md-2">';
+                            get_template_part(
+                                'template-parts/card',
+                                'social',
+                                array(
+                                    'key'   => $key,
+                                    'value' => $value,
+                                )
+                            );
+                            echo '</div>';
+                        }
+                        ?>
                     </div>
                 </div>
             </section>

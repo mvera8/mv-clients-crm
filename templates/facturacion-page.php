@@ -32,8 +32,8 @@ get_header();
                     the_content();
                     ?>
 
-                    <div class="row">
-                        <div class="col-12 col-md-3">
+                    <div class="row g-3">
+                        <div class="col-12 col-md-4">
                             <?php
                             get_template_part(
                                 'template-parts/card',
@@ -45,7 +45,7 @@ get_header();
                             );
                             ?>
                         </div>
-                        <div class="col-12 col-md-3">
+                        <div class="col-12 col-md-4">
                             <?php
                             get_template_part(
                                 'template-parts/card',
@@ -57,7 +57,7 @@ get_header();
                             );
                             ?>
                         </div>
-                        <div class="col-12 col-md-3">
+                        <div class="col-12 col-md-4">
                             <?php
                             get_template_part(
                                 'template-parts/card',
@@ -69,12 +69,47 @@ get_header();
                             );
                             ?>
                         </div>
-                        <div class="col-12 col-md-3">
-                            <div class="card border-0 shadow-sm 3">
+                        <div class="col-12 col-md-6">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body">
+
+                                    <div class="row align-items-end g-1">
+                                        <?php
+                                        if (!empty($payments_by_month)) :
+                                            foreach (array_slice(array_reverse($payments_by_month), 0, 12) as $month) :
+                                                printf(
+                                                    '<div class="col-1">
+                                                        <div
+                                                        class="p-1 bg-success rounded w-100"
+                                                        style="height: %spx;"
+                                                        data-bs-toggle="tooltip"
+                                                        data-bs-placement="top"
+                                                        data-bs-title="%s"
+                                                        ></div>
+                                                        <p class="text-muted mb-0 mt-1 small text-uppercase">%s</p>
+                                                    </div>',
+                                                    $month['total']/4,
+                                                    'USD ' . number_format($month['total']),
+                                                    substr($month['label'], 0, 3)
+                                                );
+                                            endforeach;
+                                        endif;
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-end mb-2">
-                                        <h3 class="mb-0">USD <?php echo number_format($payments_current_month_paid); ?></h3>
-                                        <p class="mb-0">Meta: USD <?php echo number_format($payments_current_month_goal); ?></p>
+                                        <div>
+                                            <p class="text-muted mb-0 small text-uppercase">
+                                                Este mes
+                                            </p>
+                                            <h3 class="mb-0">USD <?php echo number_format($payments_current_month_paid); ?></h3>
+                                        </div>
+                                        <p class="text-muted mb-0 small text-uppercase">Meta: USD <?php echo number_format($payments_current_month_goal); ?></p>
                                     </div>
 
                                     <div class="progress">
@@ -90,54 +125,58 @@ get_header();
                                 </div>
                             </div>
                         </div>
+
+                        <?php
+                        if (!empty($payments_by_month)) :
+                            foreach ($payments_by_month as $month) :
+                                ?>
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <strong><?php echo esc_html($month['label']); ?></strong>
+                                            <span>Total cobrado: 
+                                                <strong>
+                                                    $<?php echo number_format($month['total'], 2); ?>
+                                                </strong>
+                                            </span>
+                                        </div>
+
+                                        <ul class="list-group list-group-flush">
+                                            <?php foreach ($month['items'] as $item) : ?>
+                                                <li class="list-group-item d-flex justify-content-between">
+                                                    <span>
+                                                        <?php echo esc_html($item['title']); ?>
+                                                        <?php if ($item['status'] !== 'pagado') : ?>
+                                                            <?php
+                                                            $badge_class = match ($item['status']) {
+                                                                'pendiente' => 'bg-warning text-dark',
+                                                                'cotizado'  => 'bg-info text-dark',
+                                                                default     => 'bg-secondary'
+                                                            };
+                                                            ?>
+                                                            <span class="badge <?php echo esc_attr($badge_class); ?> ms-2">
+                                                                <?php echo esc_html(ucfirst($item['status'])); ?>
+                                                            </span>
+                                                        <?php endif; ?>
+                                                    </span>
+                                                    <span>
+                                                        $<?php echo number_format($item['amount'], 2); ?>
+                                                    </span>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+
+                        <?php else : ?>
+                            <div class="col-12">
+                                <p>No hay datos</p>
+                            </div>
+                        <?php endif; ?>
                     </div>
 
-                    <?php
-                    if (!empty($payments_by_month)) : ?>
-                        <?php foreach ($payments_by_month as $month) : ?>
-                            <div class="card mb-4">
-                                <div class="card-header d-flex justify-content-between">
-                                    <strong><?php echo esc_html($month['label']); ?></strong>
-                                    <span>Total cobrado: 
-                                        <strong>
-                                            $<?php echo number_format($month['total'], 2); ?>
-                                        </strong>
-                                    </span>
-                                </div>
-
-                                <ul class="list-group list-group-flush">
-                                    <?php foreach ($month['items'] as $item) : ?>
-                                        <li class="list-group-item d-flex justify-content-between">
-                                            <span>
-                                                <?php echo esc_html($item['title']); ?>
-                                                <?php if ($item['status'] !== 'pagado') : ?>
-                                                    <?php
-                                                    $badge_class = match ($item['status']) {
-                                                        'pendiente' => 'bg-warning text-dark',
-                                                        'cotizado'  => 'bg-info text-dark',
-                                                        default     => 'bg-secondary'
-                                                    };
-                                                    ?>
-                                                    <span class="badge <?php echo esc_attr($badge_class); ?> ms-2">
-                                                        <?php echo esc_html(ucfirst($item['status'])); ?>
-                                                    </span>
-                                                <?php endif; ?>
-                                            </span>
-                                            <span>
-                                                $<?php echo number_format($item['amount'], 2); ?>
-                                            </span>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-
-                        <?php endforeach; ?>
-
-                    <?php else : ?>
-                        <p>No hay datos</p>
-                    <?php endif; ?>
-
-
+                    
 
                 </div>
             </section>
