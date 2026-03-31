@@ -13,6 +13,7 @@ services:
       WORDPRESS_CONFIG_EXTRA: |
         define('WPLANG', 'en_US');
         define('WP_ENV', 'development');
+        define( 'DISALLOW_FILE_EDIT', true );
     volumes:
       # Core persistido en volumen (¡no lo pises con un bind local!)
       - wp_core:/var/www/html
