@@ -3,35 +3,6 @@
     "title": "CPT: Projects",
     "fields": [
         {
-            "key": "field_6988d91ac858a",
-            "label": "Cliente",
-            "name": "client",
-            "aria-label": "",
-            "type": "post_object",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "clients"
-            ],
-            "post_status": [
-                "publish"
-            ],
-            "taxonomy": "",
-            "return_format": "object",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "bidirectional": 0,
-            "ui": 1,
-            "bidirectional_target": []
-        },
-        {
             "key": "field_6988d93fc858b",
             "label": "Sitio Website",
             "name": "website",
@@ -66,6 +37,40 @@
             "default_value": "",
             "allow_in_bindings": 0,
             "placeholder": ""
+        },
+        {
+            "key": "field_6988d91ac858a",
+            "label": "Cliente",
+            "name": "client",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "clients"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search",
+                "post_type",
+                "taxonomy"
+            ],
+            "return_format": "object",
+            "min": "",
+            "max": "",
+            "allow_in_bindings": 0,
+            "elements": "",
+            "bidirectional": 0,
+            "bidirectional_target": []
         }
     ],
     "location": [
@@ -87,5 +92,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773423637
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1781539937
 }

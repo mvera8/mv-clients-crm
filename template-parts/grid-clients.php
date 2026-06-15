@@ -16,52 +16,47 @@ if ( $data->have_posts() ) :
         $name = get_the_title($id);
         $email = get_field('client_email', $id);
         $client_contact_type = get_field('client_contact_type', $id);
-
-        $projects_query = new WP_Query(array(
-            'post_type'      => 'projects',
-            'posts_per_page' => -1,
-            'meta_query'     => array(
-                array(
-                    'key'     => 'client',
-                    'value'   => $id,
-                    'compare' => '=',
-                ),
-            ),
-        ));
+        $companies = get_the_terms( $id, 'client_company' );
         ?>
         <div class="col-12 col-md-4 pb-4">
             <div class="card border-0 mb-3 shadow-sm h-100">
                 <div class="card-body pb-0">
-                    <div class="d-flex justify-content-start align-items-start gap-3">
-                        <span class="rounded text-primary bg-primary-subtle p-3">
-                            <?php echo mv_icon_selector($client_contact_type); ?>
-                        </span>
+                    <div class="d-flex justify-content-between align-items-start gap-3">
+                        
                         <div>
                             <h5 class="card-title mb-1"><?php echo esc_html( $name ); ?></h5>
                             <p class="card-text text-muted small mb-1"><?php echo esc_html( $email ); ?></p>
-                            <p class="card-text small mb-0"><?php echo $projects_query->found_posts; ?> proyecto/s</p>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <?php if ( is_array($client_contact_type) && !empty($client_contact_type) ) : ?>
+                                <?php foreach ( $client_contact_type as $type ) : ?>
+                                    <span class="rounded text-primary bg-primary-subtle p-1">
+                                        <?php echo mv_icon_selector($type); ?>
+                                    </span>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <span class="rounded text-primary bg-primary-subtle p-1">
+                                    <?php echo mv_icon_selector($client_contact_type); ?>
+                                </span>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer text-body-secondary">
-                    <?php if ( $projects_query->have_posts() ) : ?>
-                        
+                    <?php if ( is_array($companies) && !empty($companies) ) : ?>
                         <ul class="list-unstyled mb-0">
-                            <?php while ( $projects_query->have_posts() ) : $projects_query->the_post(); ?>
+                            <?php foreach ( $companies as $company ) : ?>
                                 <li>
-                                    <a href="<?php the_permalink(); ?>" class="text-decoration-none">
+                                    <a href="<?php echo esc_url( get_term_link($company) ); ?>" class="text-decoration-none">
                                         <span class="badge bg-primary-subtle text-primary me-1">
-                                            <?php the_title(); ?>
+                                            <?php echo esc_html( $company->name ); ?>
                                         </span>
                                     </a>
                                 </li>
-                            <?php endwhile; ?>
+                            <?php endforeach; ?>
                         </ul>
-
-                        <?php wp_reset_postdata(); ?>
-
                     <?php else : ?>
-                        <small class="text-muted">Sin proyectos asociados</small>
+                        <small class="text-muted">Sin empresa asociada</small>
                     <?php endif; ?>
                 </div>
             </div>
